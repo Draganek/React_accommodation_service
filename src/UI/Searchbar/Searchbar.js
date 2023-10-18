@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import PropTypes from 'prop-types';
+import ThemeContext from "../../components/context/themeContext";
 
 const propTypes = {
     onSearch: PropTypes.func.isRequired
@@ -7,12 +8,12 @@ const propTypes = {
 
 function Searchbar(props) {
     const [term, setTerm] = useState('');
+    const theme = useContext(ThemeContext)
 
     const search = () => {
         props.onSearch(term);
     }
-
-
+    
     return (
         <div className="d-flex">
             <input
@@ -22,11 +23,12 @@ function Searchbar(props) {
                 className="form-control"
                 type="text"
                 placeholder="Szukaj..." />
-            <button
-                onClick={search}
-                className="ms-1 btn btn-secondary">
-                Szukaj
-            </button>
+                    <button
+                        onClick={search}
+                        className={`ms-1 btn btn-${theme.color}`}>
+                        Szukaj
+                    </button>
+
         </div>
     )
 }

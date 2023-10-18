@@ -4,9 +4,14 @@ import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu';
 import Hotels from './components/Hotels/Hotels';
 import LoadingIcon from './UI/LoadingIcon/LoadingIcon';
-import Searchbar from './UI/LoadingIcon/Searchbar/Searchbar'
+import Searchbar from './UI/Searchbar/Searchbar';
+import Layout from './components/Layout/Layout';
+import Footer from './components/Footer/Footer';
+import ThemeButton from './UI/ThemeButton/ThemeButton';
+import ThemeContext from './components/context/themeContext';
 
 class App extends Component {
+  static contextType = ThemeContext;
   hotels = [
     {
       id: 1,
@@ -27,7 +32,8 @@ class App extends Component {
   ]
   state = {
     hotels: [],
-    loading: true
+    loading: true,
+    theme: 'primary'
   };
 
   searchHandler(term) {
@@ -48,20 +54,42 @@ class App extends Component {
     }, 1000);
   }
 
+  changeTheme = () => {
+    const newTheme = this.state.theme === 'primary' ? 'danger' : 'primary';
+    this.setState({ theme: newTheme });
+  }
 
   render() {
-    return (
-      <div className="App">
-        <Header>
-          <Searchbar onSearch={term => this.searchHandler(term)}/>
-        </Header>
+    const header = (
+      <Header>
+        <Searchbar
+          onSearch={term => this.searchHandler(term)}
+        />
+        <ThemeButton onChange={this.changeTheme} />
+      </Header>
+    );
 
-        <Menu />
-        {this.state.loading
-          ? <LoadingIcon />
-          : <Hotels hotels={this.state.hotels} />
-        }
-      </div>
+    const content = (
+      this.state.loading
+        ? <LoadingIcon />
+        : <Hotels hotels={this.state.hotels} />
+    );
+
+    const menu = <Menu />;
+    const footer = <Footer />;
+
+    return (
+      <ThemeContext.Provider value={{
+        color: this.state.theme,
+        changeTheme: this.changeTheme
+      }}>
+        <Layout
+          header={header}
+          menu={menu}
+          content={content}
+          footer={footer}
+        />
+      </ThemeContext.Provider>
     );
   }
 }

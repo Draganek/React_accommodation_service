@@ -3,7 +3,7 @@ import style from "./Menu.module.css";
 
 function Menu() {
     return (
-        <div className={`${style.menuContainer} container`}>
+        <div className={`${style.menuContainer}`}>
             <ul className={style.menu}>
                 <li className={style.menuItem}>
                     <a href="#">Home</a>

@@ -3,7 +3,7 @@ import styles from './Header.module.css';
 
 function Header(props) {
     return (
-        <header className={`container ${styles.header} `}>
+        <header className={`${styles.header}`}>
             {props.children}
         </header>
     );
