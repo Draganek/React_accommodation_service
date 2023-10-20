@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useContext } from "react";
 import styles from './Hotel.module.css';
 import hotelImg from '../../../assets/images/hotel.jpg';
-import ThemeContext from '../../context/themeContext';
+import ThemeContext from '../../../context/themeContext';
 
 const propTypes = {
     name: PropTypes.string.isRequired,

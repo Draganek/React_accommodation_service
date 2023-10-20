@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import PropTypes from 'prop-types';
-import ThemeContext from "../../components/context/themeContext";
+import ThemeContext from "../../context/themeContext";
 
 const propTypes = {
     onSearch: PropTypes.func.isRequired

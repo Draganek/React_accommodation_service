@@ -1,4 +1,4 @@
-import ThemeContext from "../../components/context/themeContext";
+import ThemeContext from "../../context/themeContext";
 import { useContext } from "react";
 
 export default function LoadingIcon(props) {
