@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+//useState()
+
+function TestHook() {
+  return (
+    <>
+    <h1>Test hook!</h1>
+    <input type='text' />
+    </>
+  );
+}
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <TestHook />
+    {/*<App />*/}
   </React.StrictMode>,
   document.getElementById('root')
 );
