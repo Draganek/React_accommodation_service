@@ -24,6 +24,7 @@ const BestHotel = (props) => {
     if (!hotel) { return null }
 
     return (
+        <div style={{paddingTop:'10px'}}>
         <div className="card bg-success text-white">
             <div className="card-header">
                 Najlepsza oferta!
@@ -38,6 +39,7 @@ const BestHotel = (props) => {
                     Pokaż
                 </a>
             </div>
+        </div>
         </div>
     )
 }

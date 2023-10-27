@@ -5,22 +5,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-//useState()
-
-function TestHook() {
-  return (
-    <>
-    <h1>Test hook!</h1>
-    <input type='text' />
-    </>
-  );
-}
-
-
 ReactDOM.render(
   <React.StrictMode>
-    <TestHook />
-    {/*<App />*/}
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

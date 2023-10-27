@@ -3,6 +3,8 @@ import React, { useContext } from "react";
 import styles from './Hotel.module.css';
 import hotelImg from '../../../assets/images/hotel.jpg';
 import ThemeContext from '../../../context/themeContext';
+import useAuth from '../../../hooks/useAuth';
+import { Link } from 'react-router-dom'
 
 const propTypes = {
     name: PropTypes.string.isRequired,
@@ -15,7 +17,13 @@ const propTypes = {
 
 function Hotel(props) {
     const theme = useContext(ThemeContext)
-    
+    const [auth] = useAuth();
+
+    const clickHandler = e => {
+        //e.preventDefault();
+        props.onOpen(props);
+    }
+
     return (
         <div className={`card ${styles.hotel}`}>
             <div className="card-body">
@@ -33,7 +41,12 @@ function Hotel(props) {
                             </div>
                             <div className="col text-end">
                                 <h5>Ocena: {props.rating}</h5>
-                                <a href="#" className={`btn btn-${theme.color} mt-2 px-4`}>Pokaż</a>
+                                <Link
+                                    className={`btn btn-${theme.color} mt-2 px-4`}
+                                    onClick={clickHandler}
+                                    to={`/hotel/${props.id}`}>
+                                    Pokaż
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -42,6 +55,11 @@ function Hotel(props) {
                         <p className={styles.description}>
                             {props.description}
                         </p>
+                        {auth
+                            ? <p className='mt-2'>Dostępność: 4 pokoje</p>
+                            : <p className='mt-2'>Dostępność: zaloguj</p>
+                        }
+
                     </div>
                 </div>
             </div>
