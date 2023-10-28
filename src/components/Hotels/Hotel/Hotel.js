@@ -10,7 +10,7 @@ const propTypes = {
     name: PropTypes.string.isRequired,
     city: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
-    description: PropTypes.number.isRequired
+    description: PropTypes.string.isRequired
 };
 
 
@@ -20,7 +20,6 @@ function Hotel(props) {
     const [auth] = useAuth();
 
     const clickHandler = e => {
-        //e.preventDefault();
         props.onOpen(props);
     }
 
@@ -44,7 +43,7 @@ function Hotel(props) {
                                 <Link
                                     className={`btn btn-${theme.color} mt-2 px-4`}
                                     onClick={clickHandler}
-                                    to={`/hotel/${props.id}`}>
+                                    to={`/hotele/${props.id}`}>
                                     Pokaż
                                 </Link>
                             </div>
