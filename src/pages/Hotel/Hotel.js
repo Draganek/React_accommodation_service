@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import {useParams } from 'react-router-dom'
 import LoadingIcon from "../../UI/LoadingIcon/LoadingIcon";
+import useWebsiteTitle from "../../hooks/useWebsiteTitle";
 
 function Hotel(props) {
     const { id } = useParams();
     const [hotel, setHotel] = useState(null);
     const [loading, setLoading] = useState(true);
+
+    const setTitle = useWebsiteTitle();
 
     const fetchHotel = () => {
         setHotel({
@@ -16,6 +19,7 @@ function Hotel(props) {
             description: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
             image: ''
           });
+          setTitle('Hotel - Dębowy');
           setLoading(false);
     }
 

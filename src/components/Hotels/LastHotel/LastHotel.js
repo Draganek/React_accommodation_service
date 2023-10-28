@@ -1,7 +1,8 @@
+import { Link } from 'react-router-dom'
 
 function LastHotel(props) {
     return (
-        <div className="card bg-secondary">
+        <div className="card bg-white">
             <div className="card-header">
                 Ostatnio oglądałeś ten hotel. Wciąż zainteresowany?
             </div>
@@ -13,9 +14,9 @@ function LastHotel(props) {
                 <div
                     style={{ width: '100px' }}
                     className="ml-auto d-flex justify-content-between">
-                    <a href="#" className="btn btn-sm btn-dark">
+                    <Link to={`/hotele/${props.id}`} className="btn btn-sm btn-dark">
                         Tak!
-                    </a>
+                    </Link>
                     <button onClick={props.onRemove} className="btn btn-sm btn-dark">
                         Nie
                     </button>
