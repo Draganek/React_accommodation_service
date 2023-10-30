@@ -1,4 +1,4 @@
-import React, { useReducer, lazy, Suspense } from 'react';
+import React, { useReducer, lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import './App.css';
 import Header from './components/Header/Header';
@@ -62,8 +62,8 @@ function App() {
   return (
     <Router>
       <AuthContext.Provider value={{
-        isAuthenticated: state.isAuthenticated,
-        login: () => dispatch({ type: 'login' }),
+        user: state.user,
+        login: (user) => dispatch({ type: 'login', user }),
         logout: () => dispatch({ type: 'logout' })
 
       }}>
