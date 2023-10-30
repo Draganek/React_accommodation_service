@@ -2,8 +2,13 @@ import { useState } from "react";
 import LoadingButton from "../../../UI/LoadingButton/LoadingButton";
 import { validate } from "../../../helpers/validations";
 import Input from "../../../components/Input/Input";
+import axiosFresh from "axios";
+import useAuth from "../../../hooks/useAuth";
+import { useHistory } from 'react-router-dom'
 
 export default function Register(props) {
+    const history = useHistory();
+    const [auth, setAuth] = useAuth();
     const [form, setForm] = useState({
         email: {
             value: '',
@@ -15,7 +20,7 @@ export default function Register(props) {
             value: '',
             error: '',
             showError: '',
-            rules: ['required', { rule: 'min', length: 4 }]
+            rules: ['required', { rule: 'min', length: 7 }]
         },
     });
 
@@ -26,14 +31,23 @@ export default function Register(props) {
 
     const [loading, setLoading] = useState(false);
 
-    const submit = e => {
+    const submit = async e => {
         e.preventDefault();
         setLoading(true);
 
-        setTimeout(() => {
-            setLoading(false);
-        }, 500)
-
+        try {
+            const res = await axiosFresh.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDER34xqMUtuQHjyY6QrGkbw4JqZ_WMiVI', {
+                email: form.email.value,
+                password: form.password.value,
+                returnSecureToken: true
+            });
+            console.log(res.data)
+            setAuth(true, res.data)
+            history.push('/')
+        } catch (ex) {
+            alert(ex.response);
+        }
+        setLoading(false);
     }
 
     const changeHandler = (value, fieldName) => {
@@ -47,6 +61,10 @@ export default function Register(props) {
                 error: error
             }
         });
+    }
+
+    if(auth) {
+        history.push('/')
     }
 
     return (
