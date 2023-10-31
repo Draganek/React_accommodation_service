@@ -2,9 +2,10 @@ import { useEffect, useState } from "react"
 import LoadingButton from "../../../UI/LoadingButton/LoadingButton";
 import { validateEmail } from "../../../helpers/validations";
 import useAuth from "../../../hooks/useAuth";
+import axios from "../../../axios-auth";
 
 export default function ProfileDetails() {
-    const [auth] = useAuth();
+    const [auth, setAuth] = useAuth();
 
     const [email, setEmail] = useState(auth.email);
     const [password, setPassword] = useState('');
@@ -13,20 +14,39 @@ export default function ProfileDetails() {
         email: '',
         password: ''
     })
+    const [msg, setMsg] = useState('');
+    const [submitInfo, setsubmitInfo] = useState(null);
     const buttonDisabled = Object.values(errors).filter(x => x).length;
 
-    const submit = (e) => {
+    const submit = async (e) => {
         e.preventDefault();
         setLoading(true);
+        try {
+            const data = {
+                idToken: auth.token,
+                email: email,
+                returnSecureToken: true
+            };
+             if (password) {
+                 data.password = password
+             };
 
-        setTimeout(() => {
-            //zapisywanie
-            if (true) {
-            } else {
+            const res = await axios.post('accounts:update', data);
 
-            }
+            setAuth({
+                email: res.data.email,
+                token: res.data.idToken,
+                userId: res.data.localId,
+            });
+            setLoading(false);
+            setsubmitInfo("Wow udało się");
+            setMsg('success')
+        } catch (ex) {
             setLoading(false)
-        }, 500)
+            setsubmitInfo("No i się wyjebało");
+            setMsg('danger')
+            console.log(ex.response);
+        }
     }
 
     useEffect(() => {
@@ -47,6 +67,7 @@ export default function ProfileDetails() {
 
     return (
         <form onSubmit={submit}>
+            {submitInfo ? (<div className={`alert alert-${msg}`}>{submitInfo}</div>) : null}
             <div className="form-group">
                 <label>Email</label>
                 <input

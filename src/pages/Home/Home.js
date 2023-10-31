@@ -5,25 +5,8 @@ import useWebsiteTitle from '../../hooks/useWebsiteTitle';
 import BestHotel from '../../components/Hotels/BestHotel/BestHotel';
 import Hotels from '../../components/Hotels/Hotels';
 import LoadingIcon from '../../UI/LoadingIcon/LoadingIcon';
-
-const backendHotels = [
-    {
-        id: 1,
-        name: 'Pod akacjami',
-        city: 'Warszawa',
-        rating: 8.3,
-        description: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
-        image: ''
-    },
-    {
-        id: 2,
-        name: 'Dębowy',
-        city: 'Lublin',
-        rating: 8.8,
-        description: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
-        image: ''
-    }
-]
+import axios from '../../axios';
+import { objectToArrayWithId } from '../../helpers/objects';
 
 export default function Home(props) {
     useWebsiteTitle('Strona główna');
@@ -32,11 +15,20 @@ export default function Home(props) {
     const [loading, setLoading] = useState(true);
     const [hotels, setHotels] = useState([]);
 
+    const fetchHotels = async () => {
+        try {
+            const res = await axios.get('/hotels.json');
+            const newHotel = objectToArrayWithId(res.data)
+                .filter(hotel => hotel.status === '1')
+            setHotels(newHotel);
+        } catch (ex) {
+            alert(JSON.stringify(ex.response))
+        }
+    }
+
     useEffect(() => {
-        setTimeout(() => {
-            setHotels(backendHotels);
-            setLoading(false);
-        }, 1000);
+        fetchHotels();
+        setLoading(false);
     }, [])
 
     const getBestHotel = () => {
