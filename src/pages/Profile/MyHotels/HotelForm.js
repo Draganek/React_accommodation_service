@@ -48,7 +48,7 @@ const HotelForm = props => {
             value: 0,
             error: '',
             showError: '',
-            rules: ['required']
+            rules: ['required'],
         }
     });
 
@@ -90,9 +90,9 @@ const HotelForm = props => {
         if (!props.hotel){
             return
         }
-        const newForm = {...form};
+        const newForm = {...form}
         for (const key in props.hotel) {
-            newForm[key].value = props.hotel[key];
+            newForm[key].value = props.hotel[key]
         }
         setForm(newForm)
     },[props.hotel]);

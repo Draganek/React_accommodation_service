@@ -8,7 +8,7 @@ const AddHotel = (props) => {
     const [auth] = useAuth();
 
     const submit = async form => {
-        const res = await axios.post('/hotels.json', form);
+        await axios.post(`/hotels.json?auth=${auth.token}`, form);
         history.push('/profil/hotele')
     }
 

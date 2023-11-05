@@ -12,13 +12,17 @@ const AddHotel = (props) => {
     const [auth] = useAuth();
 
     const submit = async form => {
-        const res = await axios.post('/hotels.json', form);
+        await axios.patch(`/hotels/${id}.json?auth=${auth.token}`, form);
         history.push('/profil/hotele')
     }
 
     const fetchHotel = async () => {
         const res = await axios.get(`/hotels/${id}.json`);
-        setHotel(res.data);
+        const hotelData = res.data;
+        delete(hotelData.user_id)
+        delete(hotelData.rating)
+
+        setHotel(hotelData);
     }
 
     useEffect(() => {
