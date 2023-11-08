@@ -1,11 +1,11 @@
 import React, { useReducer, lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import './App.css';
-import Header from './components/Header/Header';
-import Menu from './components/Menu/Menu';
+import Header from './components/Layout/Header/Header';
+import Menu from './components/Layout/Menu/Menu';
 import Searchbar from './UI/Searchbar/Searchbar';
 import Layout from './components/Layout/Layout';
-import Footer from './components/Footer/Footer';
+import Footer from './components/Layout/Footer/Footer';
 import ThemeButton from './UI/ThemeButton/ThemeButton';
 import ThemeContext from './context/themeContext';
 import AuthContext from './context/authContext';

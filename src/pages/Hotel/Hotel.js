@@ -50,12 +50,13 @@ function Hotel(props) {
                 <p>Miejscowość: <b>{hotel.city}</b></p>
                 <p>Pokoje: <b>{hotel.rooms}</b></p>
                 <p className="lead">{hotel.description}</p>
-                <p>Wyposażenie:</p>
-                <ul>
+                {hotel.features && (<p>Wyposażenie:</p>) && (<ul>
                     {hotel.features.map(item =>
                         <li key={item}>{item}</li>
                     )}
-                </ul>
+                </ul>)}
+
+
                 <h4>Ocena: {props.rating ?? 'brak ocen'}</h4>
             </div>
             <div className="card-footer">

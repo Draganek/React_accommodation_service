@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Header.module.css";
-import withMousePosition from "../../hoc/withMousePosition";
+import withMousePosition from "../../../hoc/withMousePosition";
 
 function Header(props) {
   const paralaxStyles = {

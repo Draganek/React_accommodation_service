@@ -38,18 +38,20 @@ export default function MyHotels() {
             {hotels ? (
                 <table className="table">
                     <thead>
-                        <th>Nazwa</th>
-                        <th>Status</th>
-                        <th>Opcje</th>
+                        <tr>
+                            <th>Nazwa</th>
+                            <th>Status</th>
+                            <th>Opcje</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        {hotels.map(hotel => (<tr>
+                        {hotels.map(hotel => (<tr key={hotel.id}>
                             <td>{hotel.name}</td>
-                            <td>{hotel.status == 1
+                            <td>{parseInt(hotel.status)=== 1
                                 ? <span className="badge bg-success text-light" >Aktywny</span>
                                 : <span className="badge bg-secondary text-light" >Ukryty</span>}</td>
                             <td>
-                                <Link to ={`/profil/hotele/edytuj/${hotel.id}`} className="btn btn-warning">Edytuj</Link>
+                                <Link to={`/profil/hotele/edytuj/${hotel.id}`} className="btn btn-warning">Edytuj</Link>
                                 <button onClick={() => deleteHandler(hotel.id)} className="ml-2 btn btn-danger">Usuń</button>
                             </td>
                         </tr>))}
